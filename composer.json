@@ -1,0 +1,19 @@
+{
+    "name": "aesonus/storage",
+    "description": "Storage Library",
+    "authors": [
+        {
+            "name": "Aesonus",
+            "email": "corylcomposinger@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aesonus\\Storage\\": "src/"
+        }
+    }
+}
