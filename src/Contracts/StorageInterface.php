@@ -18,4 +18,6 @@ interface StorageInterface extends \Countable
     public function set($offset, $value);
     
     public function has($offset);
+    
+    public function append($value);
 }
