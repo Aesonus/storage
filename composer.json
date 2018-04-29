@@ -13,7 +13,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Aesonus\\Storage\\": "src/"
+            "Aesonus\\Storage\\": "src/",
+            "Aesonus\\Tests\\": "tests/"
         }
     }
 }

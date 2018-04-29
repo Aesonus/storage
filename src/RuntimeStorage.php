@@ -28,7 +28,7 @@ class RuntimeStorage implements Contracts\StorageInterface
 
     public function has($offset)
     {
-        return $this->storage[$offset] === NULL;
+        return isset($this->storage) || $this->storage[$offset] !== NULL;
     }
 
     public function set($offset, $value)
