@@ -12,15 +12,19 @@ namespace Aesonus\Storage;
  */
 class RuntimeStorage implements Contracts\StorageInterface
 {
+
     protected $storage;
-    
+
     public function count()
     {
         return count($this->storage);
     }
 
-    public function get($offset)
+    public function get($offset, $default = null)
     {
+        if (!$this->has($offset)) {
+            return $default;
+        }
         return $this->storage[$offset];
     }
 
@@ -34,7 +38,7 @@ class RuntimeStorage implements Contracts\StorageInterface
         $this->storage[$offset] = $value;
         return $this;
     }
-    
+
     public function append($value)
     {
         $this->storage[] = $value;
