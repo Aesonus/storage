@@ -11,11 +11,16 @@ namespace Aesonus\Storage\Contracts;
  */
 interface StorageInterface extends \Countable
 {
-    public function get($offset);
+    /**
+     * MUST return a value from storage at $offset
+     * @param string $offset MUST be string
+     * @param mixed $default MUST be returned if no offset exists
+     */
+    public function get($offset, $default = NULL);
     
     public function set($offset, $value);
     
     public function has($offset);
     
-    public function append($value);
+    public function append($value, $default = NULL);
 }
