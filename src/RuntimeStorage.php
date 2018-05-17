@@ -31,7 +31,8 @@ class RuntimeStorage implements Contracts\StorageInterface
 
     public function set($offset, $value)
     {
-        return $this->storage[$offset] = $value;
+        $this->storage[$offset] = $value;
+        return $this;
     }
     
     public function append($value)
