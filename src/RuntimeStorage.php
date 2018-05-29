@@ -13,7 +13,7 @@ namespace Aesonus\Storage;
 class RuntimeStorage implements Contracts\StorageInterface
 {
 
-    protected $storage;
+    protected $storage = [];
 
     public function count()
     {
