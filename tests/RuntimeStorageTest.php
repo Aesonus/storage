@@ -82,4 +82,14 @@ class RuntimeStorageTest extends BaseTestCase
     {
         $this->assertEquals(2, $storage->count());
     }
+    
+    /**
+     * @depends testAppend 
+     *
+     */
+    public function testUnset(\Aesonus\Storage\RuntimeStorage $storage)
+    {
+        $storage->unsetOffset(0);
+        $this->assertEquals(null, $storage->get(0));
+    }
 }
