@@ -1,8 +1,7 @@
 <?php
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This code is part of the aesonus/storage package.
+ * This software is licensed under the MIT License. Please see LICENSE for more details.
  */
 
 namespace Aesonus\Tests;
@@ -12,7 +11,7 @@ namespace Aesonus\Tests;
  *
  * @author Aesonus <corylcomposinger at gmail.com>
  */
-class RuntimeStorageTest extends BaseTestCase
+class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
 {
     protected $storage;
     
