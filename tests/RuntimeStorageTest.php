@@ -89,7 +89,7 @@ class RuntimeStorageTest extends BaseTestCase
      */
     public function testUnset(\Aesonus\Storage\RuntimeStorage $storage)
     {
-        $storage->offsetUnset(0);
+        $storage->unsetOffset(0);
         $this->assertEquals(null, $storage->get(0));
     }
 }
