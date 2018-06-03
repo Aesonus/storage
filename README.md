@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Aesonus/storage.svg?branch=master)](https://travis-ci.org/Aesonus/storage)
+
 # Storage
 
 Defines contracts for storing information.
