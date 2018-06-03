@@ -12,12 +12,6 @@
     "require-dev": {
         "aesonus/test-lib": "dev-master"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Aesonus/test-lib.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Aesonus\\Storage\\": "src/",
