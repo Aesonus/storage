@@ -18,11 +18,14 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
     protected $storageMockBuilder;
     protected $storage;
     protected $testFilename;
+    protected $streamContainer;
     
     protected function setUp()
     {
+        $this->streamContainer = vfsStream::setup();
+        $this->testFilename = $this->streamContainer->url() . '/cache';
         $this->storageMockBuilder = $this->getMockBuilder(\Aesonus\Storage\FileStorage::class);
-        $this->testFilename = vfsStream::setup()->url() . '/cache';
+        
         parent::setUp();
     }
     
@@ -81,13 +84,14 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
     public function testFilenameDefault()
     {
         $storage = $this->getStorageWithFilenameMethod();
-        $this->assertEquals('cache', $storage->filename());
+        $this->assertEquals('cache', $storage->filename(null, $this->streamContainer->url()));
+        //This test has to clean itself up as it uses the filesystem
+        unlink('cache');
     }
-    
     
     public function testUnwritableFile()
     {
-        vfsStream::newFile('cache', 0000)->at(vfsStream::setup());
+        vfsStream::newFile('cache', 0000)->at($this->streamContainer);
         $storage = $this->getStorageWithFilenameMethod();
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage("must be writable");
