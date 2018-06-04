@@ -102,6 +102,14 @@ class FileStorage extends RuntimeStorage
         return parent::has($offset);
     }
     
+    public function all()
+    {
+        if (!$this->runtime_cache) {
+            $this->readFile();
+        }
+        return parent::all();
+    }
+    
     //File operations
     
     protected function writeFile()

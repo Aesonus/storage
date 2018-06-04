@@ -162,6 +162,7 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
         $storage->append('test');
         $this->assertEquals('test', $this->getPropertyValue($storage, 'storage')[0]);
         $this->assertEquals(['test'], unserialize(file_get_contents($storage->filename())));
+        return $storage;
     }
     
     private function getStorageForGettingAndCountingNoCache()
@@ -189,6 +190,14 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
         $this->assertEquals("test", $storage->get(0));
     }
     
+    public function testAllWithNoCache()
+    {
+        $storage = $this->getStorageForGettingAndCountingNoCache();
+        $storage->set(0,"test");
+        $storage->expects($this->exactly(1))->method('readFile');
+        $this->assertEquals(["test"], $storage->all());
+    }
+    
     public function testHasWithNoCache()
     {
         $storage = $this->getStorageForGettingAndCountingNoCache();
@@ -212,6 +221,14 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
         $storage->set(0,"test");
         $storage->expects($this->exactly(0))->method('readFile');
         $this->assertEquals(1, $storage->count());
+    }
+    
+    public function testAllWithCache()
+    {
+        $storage = $this->getStorageForGettingAndCountingWithCache();
+        $storage->set(0,"test");
+        $storage->expects($this->exactly(0))->method('readFile');
+        $this->assertEquals(["test"], $storage->all());
     }
     
     public function testGetWithCache()

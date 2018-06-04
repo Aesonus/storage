@@ -51,4 +51,9 @@ class RuntimeStorage implements Contracts\StorageInterface
         unset($this->storage[$offset]);
         return $this;
     }
+    
+    public function all()
+    {
+        return $this->storage;
+    }
 }

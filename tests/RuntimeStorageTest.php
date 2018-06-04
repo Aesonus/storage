@@ -13,21 +13,21 @@ namespace Aesonus\Tests;
  */
 class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
 {
+
     protected $storage;
-    
+
     protected function setUp()
     {
         $this->storage = new \Aesonus\Storage\RuntimeStorage();
     }
-    
+
     /**
      * @dataProvider setDataProvider
-     **/
+     * */
     public function testSet($offset, $value)
     {
         $this->storage->set($offset, $value);
-        $this->assertEquals([$offset => $value], 
-            $this->getPropertyValue($this->storage, 'storage'));
+        $this->assertEquals([$offset => $value], $this->getPropertyValue($this->storage, 'storage'));
         return $this->storage;
     }
 
@@ -36,22 +36,22 @@ class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
         return [
             ['string', 'teststring'],
             [0, 'testvalue'],
-            [8, [3,5,6]]
+            [8, [3, 5, 6]]
         ];
     }
-    
+
     public function testAppend()
     {
         $value1 = 'hi';
         $value2 = 'there';
         $expected = [$value1, $value2];
-        
+
         $this->storage->append($value1);
         $this->storage->append($value2);
         $this->assertEquals($expected, $this->getPropertyValue($this->storage, 'storage'));
         return $this->storage;
     }
-    
+
     /**
      * 
      * @depends testAppend
@@ -62,7 +62,7 @@ class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
         $this->assertTrue($storage->has(1));
         return $storage;
     }
-    
+
     /**
      * 
      * @depends testHas
@@ -72,7 +72,7 @@ class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
         $this->assertEquals('hi', $storage->get(0));
         $this->assertEquals('there', $storage->get(1));
     }
-    
+
     /**
      * 
      * @depends testAppend
@@ -84,11 +84,20 @@ class RuntimeStorageTest extends \Aesonus\TestLib\BaseTestCase
     
     /**
      * @depends testAppend 
-     *
+     */
+    public function testAll(\Aesonus\Storage\RuntimeStorage $storage)
+    {
+        $this->assertEquals(['hi', 'there'], $storage->all());
+    }
+    
+    /**
+     * @depends testAppend 
      */
     public function testUnset(\Aesonus\Storage\RuntimeStorage $storage)
     {
         $storage->offsetUnset(0);
         $this->assertEquals(null, $storage->get(0));
     }
+
+    
 }
