@@ -6,7 +6,6 @@
 
 namespace Aesonus\Tests;
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\visitor\vfsStreamStructureVisitor;
 
 /**
  * Tests the file storage
@@ -112,6 +111,20 @@ class FileStorageTest extends \Aesonus\TestLib\BaseTestCase
         $this->setPropertyValue($storage, 'storage', $testData);
         $this->invokeMethod($storage, 'writeFile');
         $this->assertEquals(serialize($testData), file_get_contents($storage->filename()));
+    }
+    
+    /**
+     * @dataProvider readWriteFileDataProvider
+     */
+    public function testOutOfDiskSpace($testData)
+    {
+        vfsStream::setQuota(10);
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Failed to write data:');
+        $storage = $this->getStorageWithAllMethods();
+        $this->setPropertyValue($storage, 'storage', $testData);
+        $this->invokeMethod($storage, 'writeFile');
+        
     }
     
     /**

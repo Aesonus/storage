@@ -114,7 +114,9 @@ class FileStorage extends RuntimeStorage
     
     protected function writeFile()
     {
-        file_put_contents($this->filename(), serialize($this->storage));
+        if (@!file_put_contents($this->filename(), serialize($this->storage))) {
+            throw new \RuntimeException('Failed to write data: ' . error_get_last()['message']);
+        }
     }
     
     protected function readFile()
